@@ -28,14 +28,14 @@ describe('data', () => {
       assert.equal(users.length, processed.length);
 
       processed.forEach(user => {
-        assert.ok(user.hasOwnProperty('id'));
+        assert.ok(user.hasOwnProperty('id')); 
         assert.ok(user.hasOwnProperty('name'));
         assert.ok(user.hasOwnProperty('github'));
         assert.ok(user.hasOwnProperty('locale'));
         assert.ok(user.hasOwnProperty('signupCohort'));
         assert.ok(user.hasOwnProperty('timezone'));
         assert.ok(user.hasOwnProperty('role'));
-        assert.ok(user.hasOwnProperty('stats'));
+        assert.ok(user.hasOwnProperty('stats')); 
         assert.isNumber(user.stats.percent);
         assert.isObject(user.stats.exercises);
         assert.isObject(user.stats.quizzes);
@@ -84,14 +84,95 @@ describe('data', () => {
   });
 
   describe('sortUsers(users, orderBy, orderDirection)', () => {
+    const studentA =  {
+     name: "Zarela Zanabria",
+     stats: { 
+       reads:{
+         total: 10,
+         completed: 5,
+         percent: 50
+       },
+      quizzes: {
+       total: 10,
+       completed: 5,
+       percent: 50,
+       scoreSum: 50,
+       scoreAvg: 10
+     },
+      percent: 50,
+      exercises:  {
+       total: 10,
+       completed: 5,
+       percent: 50
+     }, } }
+const studentB = {
+   name: "Melodie Ayala", 
+  stats:{ 
+   reads: {
+     total: 10,
+     completed: 10,
+     percent: 100
+   },
+   quizzes: {
+     total: 10,
+     completed: 10,
+     percent: 100,
+     scoreSum: 1000,
+     scoreAvg: 100
+   },
+   percent: 100,
+   exercises:{
+     total: 10,
+     completed: 10,
+     percent: 100
+   }, } }                     
+const studentC = {   
+   name: "Ailim Moscoso",  
+   stats:{
+     reads: {
+       total: 10,
+       completed: 0,
+       percent: 0
+     },
+     quizzes: {
+       total: 10,
+       completed: 0,
+       percent: 0,
+       scoreSum: 0,
+       scoreAvg: 0
+     },
+     percent: 0,
+     exercises:{
+       total: 10,
+       completed: 0,
+       percent: 0
+     },
+    } 
+   }
+let students = [studentA, studentB, studentC];
 
-    it('debería retornar arreglo de usuarios ordenado por nombre ASC');
-    it('debería retornar arreglo de usuarios ordenado por nombre DESC');
-    it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC');
-    it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC');
-    it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC');
-    it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC');
-    it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC');
+    it('debería retornar arreglo de usuarios ordenado por nombre ASC',()=>{
+      assert.deepEqual(sortUsers(students, "Name", "ASC"), [studentC,studentB,studentA])
+    });
+    it('debería retornar arreglo de usuarios ordenado por nombre DESC', ()=>{
+      assert.deepEqual(sortUsers(students, "Name", "DESC"), [studentA,studentB,studentC])
+    } );
+    it('debería retornar arreglo de usuarios ordenado por porcentaje general ASC',()=>{
+      assert.deepEqual(sortUsers(students, "Percent", "ASC"), [studentC,studentA,studentB])
+    });
+    it('debería retornar arreglo de usuarios ordenado por porcentaje general DESC',()=>{
+      assert.deepEqual(sortUsers(students, "Percent", "DES"), [studentB,studentA,studentC])
+    });
+    it('debería retornar arreglo de usuarios ordenado por ejercicios completados ASC',()=>{
+      assert.deepEqual(sortUsers(students, "ExcercisePercent", "ASC"), [studentC,studentA,studentB])
+
+    });
+    it('debería retornar arreglo de usuarios ordenado por ejercicios completados DESC',()=>{
+      assert.deepEqual(sortUsers(students, "ExcercisePercent", "DES"), [])
+    });
+    it('debería retornar arreglo de usuarios ordenado por quizzes completados ASC', ()=>{
+     
+    });
     it('debería retornar arreglo de usuarios ordenado por quizzes completados DESC');
     it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados ASC');
     it('debería retornar arreglo de usuarios ordenado por score promedio en quizzes completados DESC');
@@ -102,7 +183,37 @@ describe('data', () => {
 
   describe('filterUsers(users, filterBy)', () => {
 
-    it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)');
+    it('debería retornar nuevo arreglo solo con usuarios con nombres que contengan string (case insensitive)',()=>{
+      let array = [{
+        "id":"LZZiC91B4NddpaPTBJ1XpT9Ox8V2",
+        "name":"Dorelly","locale":"es-PE",
+        "timezone":"America/Lima","role":"student"},
+        {"id":"mIyuhjFX4uhASyDcWReNE5dcd2I2",
+        "github":"",
+        "locale":"es-ES",
+        "timezone":"America/Lima",
+        "name":"Fiorella S",
+        "linkedin":"","role":"student"},
+        {"id":"pHuZDr9WjBV1qrU66QZlq2yhGmC2",
+        "timezone":"America/Lima",
+        "name":"Dory",
+        "locale":"es-PE","role":"student"},
+        {"id":"rosNOO9dNQQDo4TlClcMiFHEIfy2",
+        "name":"Dalia","locale":"es-PE",
+        "timezone":"America/Lima","role":"student"}]
+    const dorelly= [{
+      "id":"LZZiC91B4NddpaPTBJ1XpT9Ox8V2",
+      "name":"Dorelly","locale":"es-PE",
+      "timezone":"America/Lima","role":"student"}
+    ];
+    const dalia = [
+      {"id":"rosNOO9dNQQDo4TlClcMiFHEIfy2",
+    "name":"Dalia","locale":"es-PE",
+    "timezone":"America/Lima","role":"student"}
+  ] 
+      assert.deepEqual(window.filterUsers(array,"Dorelly"), dorelly);
+      assert.deepEqual(window.filterUsers(array,"Dalia"), dalia);
+    });
 
   });
 
