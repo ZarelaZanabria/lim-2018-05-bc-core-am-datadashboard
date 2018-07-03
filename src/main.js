@@ -108,13 +108,15 @@ selectbtn.addEventListener('change', e => {
 });
 //Evento para buscar Estudiante
 inputFilterUser.addEventListener('keyup', (event) => {
+    debugger
+    console.log(options);
 
     
     let search = inputFilterUser.value; // Texto
     options.search = search;
    
     const mostrarloquesebusca = processCohortData(options);
-    console.log (mostrarloquesebusca);
+    //console.log (mostrarloquesebusca);
    // let search= inputFilterUser.value;
    /*  let mostrarloquesebusca = window.filterUsers(listUsuarioComputerUser, search); */
     listUsers.innerHTML = " ";

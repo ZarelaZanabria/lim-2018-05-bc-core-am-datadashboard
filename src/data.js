@@ -1,14 +1,15 @@
-let listUsuarioComputerUser = [];
+//let listUsuarioComputerUser = [];
 
 window.computeUsersStats = (users, progress, courses) => {
     
-    users.map(usuario => {
-        const UsuarioNuevo = NuevoUsuarioStats(usuario, progress[usuario.id], courses);
-        listUsuarioComputerUser.push(UsuarioNuevo);
+    let usersWithStats = users.map(usuario => {
+        return NuevoUsuarioStats(usuario, progress[usuario.id], courses);
+        //listUsuarioComputerUser.push(UsuarioNuevo);
     });
-    return listUsuarioComputerUser;    
+    // console.log(usersWithStats);
+    return usersWithStats;    
 }
-console.log(listUsuarioComputerUser) 
+//console.log(listUsuarioComputerUser) 
 
 const NuevoUsuarioStats = (usuario, progress, courses) => {
     let nameUser = usuario.name;
@@ -251,6 +252,7 @@ window.processCohortData = (options) => {
     let courses = Object.keys (options.cohort.coursesIndex);
     let students = computeUsersStats(options.cohortData.users,options.cohortData.progress,courses);
     students = sortUsers(students,options.orderBy, options.orderDirection);
+    
     if (options.search !==''){
         students = filterUsers(students,options.search);
     }
