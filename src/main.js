@@ -139,6 +139,7 @@ orderBybtn.addEventListener('click', (event) => {
         listUsers.innerHTML = " ";
         ListarUsuarios(sortedUsers);
     } else if (selectOrderBy.value === "percent") {
+        options.orderBy='Percent';
         const sortedUsers= processCohortData(options);       
         listUsers.innerHTML = " ";
         ListarUsuarios(sortedUsers);
