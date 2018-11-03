@@ -1,61 +1,41 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
+h1{
   text-align: center;
+  color: #ff009e;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 }
 
-/* Style the header */
-header {
-  background-color: #ffffff;
-  display: inline-block;
+.avatar{
+  /* cambia estos dos valores para definir el tamaño de tu círculo */
   height: 100px;
-  width: 100%;
-  margin: 0%;
-}
-figure{
-margin: 0;
-height: 100px;  
-text-align: center;
-}
-img{
-margin: 0;
-height: 100px;
+  width: 100px;
+  /* los siguientes valores son independientes del tamaño del círculo */
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
+  background-size: 100% auto;
+  margin-left: 30%;
+  margin-top: 10%;
+
 }
 
+.card-lima{
+  align-content: center; 
+  background-color: #ff009e;
+   margin: 0 0 10% 0; 
+   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
 
-#contenedor {
-  display: inline-block;
-  padding: 20px;
-  width: 70%;
-  background-color: #f1f1f1;
-  height: 100%;
-  margin: 0%;
-  text-align: left;
+}
+.title-lima{
+  color: #ffffff;
+  font-size: 320%;
+  margin-left: 23%;
+}
+.img-user{
+  width: 10%;
 }
 
-#sedes{
-  padding: 0%;
-  margin: 0%;
-}
-#select-cohorts{
-width: 100%;
-}
-
-
-/* Clear floats after the columns */
-#contenedor:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens */
-@media (max-width: 600px) {
-  #contenedor {
-      width: 100%;
-      height: 100%;
-  }
+.table .thead-dark th {
+  color: #1d2124;
+  background-color: #56f89a;
+  border-color:#56f89a;
 }

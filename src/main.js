@@ -28,7 +28,7 @@ const getJSON = (url, callback) => {
   request.send();
 }
 const handleError = () => {
-   console.log('Se ha presentado un error');
+  console.log('Se ha presentado un error');
 }
 const addUserProgress = () => {
   const users = JSON.parse(event.target.responseText);
@@ -36,14 +36,15 @@ const addUserProgress = () => {
   const addCohorts = (event) => {
     const cohorts = JSON.parse(event.target.responseText);
     options.cohort = cohorts;
-
+    const nuevoArray = cohorts.filter(cohort => cohort.id.indexOf('lim-2018-03') > -1);
     //MUESTRA TODOS LOS COHORST               
-    cohorts.map((dataCohorts) => {
+    nuevoArray.map((dataCohorts) => {
       const listCohort = document.createElement('option');
       listCohort.value = dataCohorts.id;
       listCohort.innerHTML = dataCohorts.id;
       selectbtn.appendChild(listCohort);
     });
+
   }
   getJSON(urlCohorts, addCohorts);
 
@@ -59,19 +60,13 @@ getJSON(urlUser, addUserProgress);
 
 //Funcion para Listar Estudiantes en una lista
 const ListarUsuarios = (userArr) => {
-  userArr.map((dateUser) => {
-    let listUser = document.createElement('li');
-    listUser.innerHTML = dateUser.name + '<br>' +
-      'Percent : ' + dateUser.stats.percent + '%' + '<br>' +
-      'Total de Ejercicios : ' + dateUser.stats.exercises.total + '<br>' +
-      'Total de Ejercicios de completo: ' + dateUser.stats.exercises.completed + '<br>' +
-      'Porcentaje de Exercises  : ' + dateUser.stats.exercises.percent + '%' + '<br>' +
-      'Total de Lecturas : ' + dateUser.stats.reads.total + '<br>' +
-      'Total de Lecturas que completo: ' + dateUser.stats.reads.completed + '<br>' +
-      'Porcentaje de Lecturas  : ' + dateUser.stats.reads.percent + '%' + '<br>' +
-      'Total de Quizzes : ' + dateUser.stats.quizzes.total + '<br>' +
-      'Total de Quizzes que completo: ' + dateUser.stats.quizzes.completed + '<br>' +
-      'Porcentaje de Quizzes  : ' + dateUser.stats.quizzes.percent + '%' + '<br>';
+  userArr.map((dateUser) => {   
+    let listUser = document.createElement('tr');
+    listUser.innerHTML += `<td>${dateUser.name}</td>
+    <td>${dateUser.stats.percent}</td>
+    <td>${dateUser.stats.reads.completed}</td>   
+    <td>${dateUser.stats.exercises.percent}</td>   
+    <td>${dateUser.stats.quizzes.percent}</td> `
     contUsers.appendChild(listUser);
   });
 }
@@ -81,9 +76,8 @@ selectbtn.addEventListener('change', e => {
 
   for (const cohort of options.cohort) {
     if (selectbtn.value === cohort.id) {
-      console.log (selectbtn.value === cohort.id)
+      console.log(selectbtn.value === cohort.id)
       options.cohort = cohort;
-      debugger
       const data = processCohortData(options);
       ListarUsuarios(data);
     }
@@ -141,3 +135,8 @@ orderBybtn.addEventListener('click', (event) => {
   }
 
 });
+
+/* $(document).ready(function() {
+  $('#example').DataTable();
+} ); */
+

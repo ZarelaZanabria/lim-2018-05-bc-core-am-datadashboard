@@ -2,9 +2,9 @@ window.computeUsersStats = (users, progress, courses) => {
 
   let usersWithStats = users.map(usuario1 => {
     return NuevoUsuarioStats(usuario1, progress[usuario1.id], courses);
-    
+
   });
-    return usersWithStats;
+  return usersWithStats;
 }
 
 
