@@ -57,8 +57,6 @@ const computerExercises = (progress, courses) => {
             });
           }
         });
-
-
       });
     });
   } catch (error) {

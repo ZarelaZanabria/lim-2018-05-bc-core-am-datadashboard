@@ -136,7 +136,3 @@ orderBybtn.addEventListener('click', (event) => {
 
 });
 
-/* $(document).ready(function() {
-  $('#example').DataTable();
-} ); */
-
